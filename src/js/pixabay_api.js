@@ -21,6 +21,13 @@ export class PixabayAPI {
       q: this.q,
       per_page: this.per_page,
     });
+
+    // Перевірка зміни ключового слова
+    const currentQ = this.q;
+    if (currentQ !== this.#BASE_SEARCH_PARAMS.q) {
+      this.page = 1; // Скидаємо сторінку до початкового значення
+    }
+
     return await axios.get(`${this.#BASE_URL}?${searchParams}`);
   }
 }
